@@ -19,9 +19,7 @@ using namespace std;
 
 void SkipList::createSkipList(uint8_t maxLevel, uint8_t skip) {
 
-  //slist = shared_ptr<_CSSL_SkipList>(new _CSSL_SkipList);
   slist = std::make_shared<_CSSL_SkipList>(_CSSL_SkipList{});
-  //_CSSL_SkipList* slist = aligned_alloc(32,sizeof(*slist));
   slist->max_level        = maxLevel;
   cout << slist->max_level  <<endl;
   slist->num_elements     = 0;
@@ -177,8 +175,8 @@ uint64_t SkipList::insertItemIntoFastLane(int8_t level,
 
 shared_ptr<_CSSL_ProxyNode> SkipList::newProxyNode(shared_ptr<_CSSL_DataNode> node) {
 
-  //shared_ptr<_CSSL_ProxyNode> proxy(new _CSSL_ProxyNode());
-  auto proxy = std::make_shared<_CSSL_ProxyNode>(_CSSL_ProxyNode{});
+  // proxy(new _CSSL_ProxyNode());
+   shared_ptr<_CSSL_ProxyNode> proxy = std::make_shared<_CSSL_ProxyNode>(_CSSL_ProxyNode{});
   //_CSSL_ProxyNode* proxy = aligned_alloc(32,sizeof(*proxy));
   proxy->keys[0] = node->key;
   proxy->updated = false;
@@ -470,7 +468,7 @@ _CSSL_RangeSearchResult SkipList::searchRange(uint64_t startKey, uint64_t endKey
 shared_ptr<_CSSL_DataNode> SkipList::newNode(uint64_t key)
 {
   //shared_ptr<_CSSL_DataNode> node(new _CSSL_DataNode());
-  auto node = std::make_shared<_CSSL_DataNode>(_CSSL_DataNode{});
+  shared_ptr<_CSSL_DataNode> node = std::make_shared<_CSSL_DataNode>(_CSSL_DataNode{});
   //_CSSL_DataNode* node = aligned_alloc(32,sizeof(*node));
   node->key  = key;
   node->next = NULL;
