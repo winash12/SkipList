@@ -35,7 +35,7 @@ class CSSLSkipList
   void insertElement(uint64_t key);
   CSSLDataNode searchStartKey(uint64_t startKey);
   uint64_t searchElement(uint64_t key);
-  CSSL_RangeSearchResult searchRange(uint64_t startKey, uint64_t endKey);
+  CSSLRangeSearchResult searchRange(uint64_t startKey, uint64_t endKey);
  private:
   uint64_t   insertItemIntoFastLane(int8_t level,
 				    shared_ptr<CSSL_DataNode> newNode);
