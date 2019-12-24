@@ -1,7 +1,10 @@
 #include <stdint.h>
-public class CSSLDataNode
+
+class CSSLDataNode
 {
+ private:
+  uint64_t key;
  public:
-  setKey(uint64_t key);
-  uint64_t CSSLDataNode::getKey();
-}
+  void setKey(uint64_t key);
+  uint64_t getKey();
+};

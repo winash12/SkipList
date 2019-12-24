@@ -1,3 +1,4 @@
+#include "CSSLDataNode.h"
 void CSSLDataNode::setKey(uint64_t key)
 {
   key = key;

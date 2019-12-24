@@ -10,6 +10,8 @@
 #include <memory>
 #include <vector>
 
+#include "CSSLDataNode.h"
+
 using std::unique_ptr;
 using std::shared_ptr;
 using std::vector;
@@ -29,6 +31,22 @@ class CSSLSkipList
 {
  private:
  public:
+  void createSkipList(uint8_t maxLevel,uint8_t skip);
   void insertElement(uint64_t key);
-  
-}
+  CSSLDataNode searchStartKey(uint64_t startKey);
+  uint64_t searchElement(uint64_t key);
+  CSSL_RangeSearchResult searchRange(uint64_t startKey, uint64_t endKey);
+ private:
+  uint64_t   insertItemIntoFastLane(int8_t level,
+				    shared_ptr<CSSL_DataNode> newNode);
+
+  void      buildFastLanes();
+
+  void     calculateFastLaneSizes();
+  void     allocateFastLanes();
+  void      resizeFastLanes();
+  void findAndInsertIntoProxyNode(shared_ptr<_CSSL_DataNode> node);
+  shared_ptr<CSSL_DataNode> newNode(uint64_t key);
+  shared_ptr<CSSL_ProxyNode> newProxyNode(shared_ptr<CSSL_DataNode> node);
+
+};
