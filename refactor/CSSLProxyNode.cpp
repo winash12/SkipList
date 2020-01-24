@@ -1,10 +1,11 @@
 #include "CSSLProxyNode.h"
-void CSSLProxyNode::setKey(uint64_t key)
+
+int CSSLProxyNode::getKey(int index)
 {
-  key = key;
+  return keys[index];
 }
 
-uint64_t CSSLProxyNode::getKey()
+CSSLDataNode CSSLProxyNode::getValue(int index)
 {
-  return key;
+  return values[index];
 }

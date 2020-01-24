@@ -1,10 +1,13 @@
 #include <stdint.h>
+#include <vector>
+#include "CSSLDataNode.h"
 
 class CSSLProxyNode
 {
  private:
-  uint64_t key;
+  std::vector<int> keys;
+  std::vector<CSSLDataNode> values;
  public:
-  void setKey(uint64_t key);
-  uint64_t getKey();
+  int getKey(int index);
+  CSSLDataNode getValue(int index);
 };
