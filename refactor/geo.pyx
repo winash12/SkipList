@@ -71,7 +71,7 @@ class GeoHash:
         lon_range.max = 180.0
         lon_range.min = -180.0
         geohash_encode(lat_range, lon_range, latitude, longitude, precision, &hash);
-        return hash.bits
+        return hash
 
     def fast_encode(self,np.float64_t longitude,np.float64_t latitude,np.uint8_t precision):
 
