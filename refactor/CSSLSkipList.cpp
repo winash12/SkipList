@@ -15,3 +15,35 @@
 #include <numeric>
 #include "CSSLSkipList.h"
 
+void CSSLSkipList::createSkipList(uint8_t maxLevel, uint8_t skip) {
+
+  slist = std::make_shared<CSSLSkipList>(CSSLSkipList{});
+  slist->max_level        = maxLevel;
+  cout << slist->max_level  <<endl;
+  slist->num_elements     = 0;
+  slist->head = newNode(0);
+  slist->tail             = slist->head;
+  slist->skip             = skip > 1 ? skip : 2;
+  slist->items_per_level  = (uint64_t*)malloc(sizeof(uint64_t) * maxLevel);
+  slist->items_per_level  = (uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
+  //Array
+  slist->starts_of_flanes = (uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
+  //Array
+  slist->flane_items      =(uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
+    /*slist->items_per_level  = aligned_alloc(32,sizeof(uint64_t) * maxLevel);
+  slist->starts_of_flanes = aligned_alloc(32,sizeof(uint64_t) * maxLevel);
+  slist->flane_items      = aligned_alloc(32,sizeof(uint64_t) * maxLevel);*/
+
+  
+  for (uint8_t level = 0; level < maxLevel; ++level)
+    {
+      slist->flane_items[level] = 0;
+    }
+
+  calculateFastLaneSizes();
+  allocateFastLanes();
+
+  srand(0);
+
+  //return slist;
+}

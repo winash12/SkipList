@@ -10,7 +10,9 @@
 #include <memory>
 #include <vector>
 
-#include "CSSLDataNode.h"
+
+#include "CSSLRangeSearchResult.h"
+#include "CSSLProxyNode.h"
 
 using std::unique_ptr;
 using std::shared_ptr;
@@ -38,15 +40,15 @@ class CSSLSkipList
   CSSLRangeSearchResult searchRange(uint64_t startKey, uint64_t endKey);
  private:
   uint64_t   insertItemIntoFastLane(int8_t level,
-				    shared_ptr<CSSL_DataNode> newNode);
+				    shared_ptr<CSSLDataNode> newNode);
 
   void      buildFastLanes();
 
   void     calculateFastLaneSizes();
   void     allocateFastLanes();
   void      resizeFastLanes();
-  void findAndInsertIntoProxyNode(shared_ptr<_CSSL_DataNode> node);
-  shared_ptr<CSSL_DataNode> newNode(uint64_t key);
-  shared_ptr<CSSL_ProxyNode> newProxyNode(shared_ptr<CSSL_DataNode> node);
+  void findAndInsertIntoProxyNode(shared_ptr<CSSLDataNode> node);
+  shared_ptr<CSSLDataNode> newNode(uint64_t key);
+  shared_ptr<CSSLProxyNode> newProxyNode(shared_ptr<CSSLDataNode> node);
 
 };
