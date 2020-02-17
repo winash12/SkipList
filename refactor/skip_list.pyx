@@ -45,11 +45,9 @@ cdef extern from "skiplist.h":
     uint64_t                insertItemIntoFastLane(_CSSL_SkipList* slist,
                                                int8_t level,
                                                _CSSL_DataNode* newNode);
-    void                    buildFastLanes(_CSSL_SkipList* slist);
-    void                    resizeFastLanes(_CSSL_SkipList* slist);
     uint64_t                searchElement(_CSSL_SkipList* slist, uint64_t key);
     _CSSL_RangeSearchResult searchRange(_CSSL_SkipList* slist, uint64_t startKey, uint64_t endKey);
-    _CSSL_DataNode*         newNode(uint64_t key);
+
 
 cdef class Skip_List:
 
