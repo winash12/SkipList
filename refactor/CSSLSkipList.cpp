@@ -41,3 +41,9 @@ void CSSLSkipList::createSkipList(uint8_t maxLevel, uint8_t skip) {
   //allocateFastLanes();
 
 }
+
+
+void CSSLSkipList::addElementToSkipList(uint64_t key)
+{
+  skipList.push_back(key);
+}

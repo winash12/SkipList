@@ -49,6 +49,7 @@ class CSSLSkipList
   void     allocateFastLanes();
   void      resizeFastLanes();
   void findAndInsertIntoProxyNode(shared_ptr<CSSLDataNode> node);
+  void addElementToSkipList(uint64_t key);
   shared_ptr<CSSLDataNode> newNode(uint64_t key);
   shared_ptr<CSSLProxyNode> newProxyNode(shared_ptr<CSSLDataNode> node);
 
