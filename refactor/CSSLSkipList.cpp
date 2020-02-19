@@ -43,6 +43,11 @@ void CSSLSkipList::createSkipList(uint8_t maxLevel, uint8_t skip) {
 }
 
 
+void CSSLSkipList::insertElement(uint64_t key)
+{
+  addElementToSkipList(key);
+}
+
 void CSSLSkipList::addElementToSkipList(uint64_t key)
 {
   skipList.push_back(key);
