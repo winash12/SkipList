@@ -32,6 +32,8 @@ using std::vector;
 class CSSLSkipList
 {
  private:
+  uint8_t maxLevel;
+  uint8_t skip;
   vector<uint64_t> skipList;
  public:
   void createSkipList(uint8_t maxLevel,uint8_t skip);
