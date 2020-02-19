@@ -18,8 +18,8 @@
 void CSSLSkipList::createSkipList(uint8_t max_level, uint8_t skip) {
 
 
-  maxLevel = maxLevel;
-  skip  = skip;
+  this->maxLevel = max_level;
+  this->skip  = skip;
   //slist->num_elements     = 0;
 
   //slist->items_per_level  = (uint64_t*)malloc(sizeof(uint64_t) * maxLevel);
