@@ -9,14 +9,13 @@
 #include <math.h>
 #include <memory>
 #include <vector>
-
+#include <array>
 
 #include "CSSLRangeSearchResult.h"
 #include "CSSLProxyNode.h"
 
 using std::unique_ptr;
 using std::shared_ptr;
-using std::vector;
 
 #define MAX_SKIP 2
 // initial size of the highest fast lane with number
@@ -34,7 +33,8 @@ class CSSLSkipList
  private:
   uint8_t maxLevel;
   uint8_t skip;
-  vector<uint64_t> skipList;
+  std::vector<uint64_t> skipList;
+  std::vector<uint64_t> itemsPerLevel;
  public:
   void createSkipList(uint8_t maxLevel,uint8_t skip);
   void insertElement(uint64_t key);
