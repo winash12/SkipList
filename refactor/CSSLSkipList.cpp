@@ -21,17 +21,9 @@ void CSSLSkipList::createSkipList(uint8_t max_level, uint8_t skip) {
   this->maxLevel = max_level;
   this->skip  = skip;
   std::vector<uint64_t> itemsPerLevel(maxLevel);
-  //slist->num_elements     = 0;
-
-  //slist->items_per_level  = (uint64_t*)malloc(sizeof(uint64_t) * maxLevel);
-  //slist->items_per_level  = (uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
-  //Array
-  //slist->starts_of_flanes = (uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
-  //Array
-  //slist->flane_items      =(uint64_t*)malloc(sizeof(uint64_t)*maxLevel);
-    /*slist->items_per_level  = aligned_alloc(32,sizeof(uint64_t) * maxLevel);
-  slist->starts_of_flanes = aligned_alloc(32,sizeof(uint64_t) * maxLevel);
-  slist->flane_items      = aligned_alloc(32,sizeof(uint64_t) * maxLevel);*/
+  numberOfElements     = 0;
+  std::vector<uint64_t> startOfFastLane(maxLevel);
+  std::vector<uint64_t> fastLaneItems(maxLevel);
 
   
   /*for (uint8_t level = 0; level < maxLevel; ++level)
