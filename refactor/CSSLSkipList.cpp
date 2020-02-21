@@ -18,8 +18,8 @@
 void CSSLSkipList::createSkipList(uint8_t max_level, uint8_t skip) {
 
 
-  uint8_t maxLevel = max_level;
-  skip  = skip;
+  this->maxLevel = max_level;
+  this->skip  = skip;
   std::vector<uint64_t> itemsPerLevel(maxLevel);
   //slist->num_elements     = 0;
 
