@@ -32,14 +32,18 @@ class CSSLSkipList
 {
  private:
   uint8_t maxLevel;
-  uint8_t skip;
+  int skip;
   std::vector<uint64_t> skipList;
   std::vector<uint64_t> itemsPerLevel;
-  std::vector<uint64_t> startOfFastLanes;
+  std::vector<uint64_t> startOfFastLane;
   std::vector<uint64_t> fastLaneItems;
   uint8_t numberOfElements;
+
+  void      buildFastLanes();
+  void calculateFastLaneSize();
+
  public:
-  void createSkipList(uint8_t maxLevel,uint8_t skip);
+  void createSkipList(uint8_t maxLevel,int skip);
   void insertElement(uint64_t key);
   CSSLDataNode searchStartKey(uint64_t startKey);
   uint64_t searchElement(uint64_t key);
@@ -48,7 +52,7 @@ class CSSLSkipList
   uint64_t   insertItemIntoFastLane(int8_t level,
 				    shared_ptr<CSSLDataNode> newNode);
 
-  void      buildFastLanes();
+
 
 
   void findAndInsertIntoProxyNode(shared_ptr<CSSLDataNode> node);
