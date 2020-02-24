@@ -38,17 +38,10 @@ void CSSLSkipList::createSkipList(uint8_t max_level, int skip) {
 }
 
 
-void CSSLSkipList::allocateFastLanes()
-{
-    for (uint32_t i = 0; i < fastLaneSize; i++)
-      fastLanes.push_back(LONG_MAX);
-
-}
-
 void CSSLSkipList::calculateFastLaneSize()
 {
-  fastLaneSize = TOP_LANE_BLOCK;
-  std::vector<uint64_t> fastLanes;    
+  uint64_t fastLaneSize = TOP_LANE_BLOCK;
+
   itemsPerLevel.insert(itemsPerLevel.end(),fastLaneSize);
   startOfFastLane.insert(startOfFastLane.end(),0);
 

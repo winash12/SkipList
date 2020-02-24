@@ -33,6 +33,7 @@ class CSSLSkipList
  private:
   uint8_t maxLevel;
   int skip;
+  uint64_t fastLaneSize;
   std::vector<uint64_t> skipList;
   std::vector<uint64_t> itemsPerLevel;
   std::vector<uint64_t> startOfFastLane;
