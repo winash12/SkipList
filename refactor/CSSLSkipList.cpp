@@ -41,8 +41,10 @@ void CSSLSkipList::createSkipList(uint8_t max_level, int skip) {
 void CSSLSkipList::allocateFastLanes()
 {
     for (uint32_t i = 0; i < fastLaneSize; i++)
-      fastLanes.push_back(LONG_MAX);
-
+      {
+	fastLanes.push_back(LONG_MAX);
+	fastLaneProxyNodes.push_back(LONG_MAX);
+      }
 }
 
 void CSSLSkipList::calculateFastLaneSize()
