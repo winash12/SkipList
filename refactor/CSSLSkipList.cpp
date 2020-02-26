@@ -72,6 +72,9 @@ void CSSLSkipList::calculateFastLaneSize()
 void CSSLSkipList::insertElement(uint64_t key)
 {
   addElementToSkipList(key);
+  for (uint8_t level = 0;level < maxLevel;level++)
+    {
+    }
 }
 
 void CSSLSkipList::addElementToSkipList(uint64_t key)
