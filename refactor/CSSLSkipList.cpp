@@ -78,6 +78,16 @@ void CSSLSkipList::insertElement(uint64_t key)
     }
 }
 
+void CSSLSkipList::insertItemIntoFastLane(int8_t level,uint64_t key)
+{
+
+  itr = std::find(startOfFastLane.begin(),startOfFastLane.end(),level);
+  itr2 = std::find(fastLaneItems.begin(),fastLaneItems.end(),level);
+  int index1 = std::distance(startOfFastLane.begin(),itr);
+  int index2 = std::distance(fastLaneItems.begin(),itr);
+  //uint64_t curPos = startOfFastLanes.
+}
+
 void CSSLSkipList::addElementToSkipList(uint64_t key)
 {
   skipList.push_back(key);
