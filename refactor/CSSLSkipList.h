@@ -40,6 +40,7 @@ class CSSLSkipList
   std::vector<uint64_t> fastLaneItems;
   std::vector<uint64_t>::iterator itr;
   std::vector<uint64_t>::iterator itr2;
+  std::vector<uint64_t>::iterator itr3;
   std::vector<uint64_t> fastLanes;    
   std::vector<uint64_t> fastLaneProxyNodes;
   uint8_t numberOfElements;

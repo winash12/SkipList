@@ -83,8 +83,12 @@ void CSSLSkipList::insertItemIntoFastLane(int8_t level,uint64_t key)
 
   itr = std::find(startOfFastLane.begin(),startOfFastLane.end(),level);
   itr2 = std::find(fastLaneItems.begin(),fastLaneItems.end(),level);
+  itr3 = std::find(itemsPerLevel.begin(),itemsPerLevel.end(),level);
   int index1 = std::distance(startOfFastLane.begin(),itr);
   int index2 = std::distance(fastLaneItems.begin(),itr);
+  uint64_t curPos = index1 + index2;
+  int index3 = std::distance(itemsPerLevel.begin(),itr);
+  uint64_t levelLimit = curPos + index3;
   //uint64_t curPos = startOfFastLanes.
 }
 
