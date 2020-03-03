@@ -11,8 +11,6 @@
 #include <vector>
 #include <array>
 
-#include "CSSLRangeSearchResult.h"
-#include "CSSLProxyNode.h"
 
 using std::unique_ptr;
 using std::shared_ptr;
@@ -31,7 +29,7 @@ using std::shared_ptr;
 class CSSLSkipList
 {
  private:
-  uint8_t maxLevel;
+  int maxLevel;
   int skip;
   uint64_t fastLaneSize;
   std::vector<uint64_t> skipList;
@@ -43,22 +41,22 @@ class CSSLSkipList
   std::vector<uint64_t>::iterator itr2;
   std::vector<uint64_t>::iterator itr3;
   std::vector<uint64_t> fastLanes;    
-  std::vector<uint64_t> fastLaneProxyNodes;
+
   uint8_t numberOfElements;
 
   void      buildFastLanes();
   void calculateFastLaneSize();
   void allocateFastLanes();
-  void findAndInsertIntoProxyNode(shared_ptr<CSSLDataNode> node);  
-  shared_ptr<CSSLProxyNode> newProxyNode(shared_ptr<CSSLDataNode> node);
+
+
   void   insertItemIntoFastLane(int8_t level,
 				uint64_t key);  
  public:
-  void createSkipList(uint8_t maxLevel,int skip);
+  void createSkipList(int maxLevel,int skip);
   void insertElement(uint64_t key);
-  CSSLDataNode searchStartKey(uint64_t startKey);
+
   uint64_t searchElement(uint64_t key);
-  CSSLRangeSearchResult searchRange(uint64_t startKey, uint64_t endKey);
+
 
   void addElementToSkipList(uint64_t key);
 

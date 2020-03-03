@@ -15,24 +15,28 @@
 #include <numeric>
 #include "CSSLSkipList.h"
 
-void CSSLSkipList::createSkipList(uint8_t max_level, int skip) {
+using namespace std;
+
+void CSSLSkipList::createSkipList(int maxLevel, int skip) {
 
 
-  this->maxLevel = max_level;
+  this->maxLevel = maxLevel;
   this->skip  = skip;
   this->numberOfElements     = 0;
-
+  cout <<"The value of maxLevel is " << this->maxLevel<<endl;
+  cout <<"The value of skip is " << this->skip<<endl;
   std::vector<uint64_t> itemsPerLevel(maxLevel);
   std::vector<uint64_t> startOfFastLane(maxLevel);
   std::vector<uint64_t> fastLaneItems(maxLevel);
 
-  
+
   for (uint8_t level = 0; level < maxLevel; ++level)
     {
       fastLaneItems.push_back(0);
     }
-  
+
   calculateFastLaneSize();
+
   allocateFastLanes();
 
 }
@@ -49,6 +53,9 @@ void CSSLSkipList::allocateFastLanes()
 void CSSLSkipList::calculateFastLaneSize()
 {
   fastLaneSize = TOP_LANE_BLOCK;
+
+  cout << "The value of fastLaneSize is " <<fastLaneSize << endl;
+
   std::vector<uint64_t> fastLanes;    
   itemsPerLevel.insert(itemsPerLevel.end(),fastLaneSize);
   startOfFastLane.insert(startOfFastLane.end(),0);
@@ -56,16 +63,17 @@ void CSSLSkipList::calculateFastLaneSize()
   int current = fastLaneSize;
   // calculate level sizes level by level
   uint64_t value;
-  for (int8_t level = this->maxLevel - 2; level >= 0; level--)
+  for (int level = this->maxLevel - 2; level >= 0; level--)
     {
       current *= skip;
-      itemsPerLevel.insert(itemsPerLevel.end()+level,current);
-      value = startOfFastLane.at(level+1) +itemsPerLevel.at(level+1);
-      startOfFastLane.insert(startOfFastLane.end()+level,value);
-      fastLaneSize += itemsPerLevel.at(level);
+      cout << "The value of current is " <<current << endl;
+      itemsPerLevel.push_back(current);
+      value = startOfFastLane[level+1] +itemsPerLevel[level+1];
+      startOfFastLane.push_back(value);
+      fastLaneSize += itemsPerLevel[level];
     }
 
-
+  exit(0);
 }
 
 void CSSLSkipList::insertElement(uint64_t key)
