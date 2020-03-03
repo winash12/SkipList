@@ -43,7 +43,6 @@ void CSSLSkipList::allocateFastLanes()
     for (uint32_t i = 0; i < fastLaneSize; i++)
       {
 	fastLanes.push_back(LONG_MAX);
-	fastLaneProxyNodes.push_back(LONG_MAX);
       }
 }
 
@@ -94,6 +93,9 @@ void CSSLSkipList::insertItemIntoFastLane(int8_t level,uint64_t key)
 
   while(key > fastLanes.at(curPos) && curPos < levelLimit)
     curPos++;
+
+  fastLanes.insert(fastLanes.begin()+curPos,key);
+  (*itr2)++;
 }
 
 void CSSLSkipList::addElementToSkipList(uint64_t key)
