@@ -12,9 +12,6 @@
 #include <array>
 
 
-using std::unique_ptr;
-using std::shared_ptr;
-
 #define MAX_SKIP 2
 // initial size of the highest fast lane with number
 // of keys that fit into one cache line
@@ -51,15 +48,14 @@ class CSSLSkipList
 
   void   insertItemIntoFastLane(int8_t level,
 				uint64_t key);  
+  void addElementToSkipList(uint64_t key);
+  
  public:
   void createSkipList(int maxLevel,int skip);
   void insertElement(uint64_t key);
 
   uint64_t searchElement(uint64_t key);
 
-
-  void addElementToSkipList(uint64_t key);
-
-
+  std::vector<uint64_t> searchRange(uint64_t startKey, uint64_t endKey);
 
 };

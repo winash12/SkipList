@@ -73,7 +73,6 @@ void CSSLSkipList::calculateFastLaneSize()
       fastLaneSize += itemsPerLevel[level];
     }
 
-  exit(0);
 }
 
 void CSSLSkipList::insertElement(uint64_t key)
