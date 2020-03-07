@@ -23,8 +23,6 @@ void CSSLSkipList::createSkipList(int maxLevel, int skip) {
   this->maxLevel = maxLevel;
   this->skip  = skip;
   this->numberOfElements     = 0;
-  cout <<"The value of maxLevel is " << this->maxLevel<<endl;
-  cout <<"The value of skip is " << this->skip<<endl;
   std::vector<uint64_t> itemsPerLevel;
   std::vector<uint64_t> startOfFastLane;
   std::vector<uint64_t> fastLaneItems;
