@@ -15,6 +15,7 @@ int main(void)
   for (uint64_t  i = 0; i < 100000; i += 1000)
     {
       skipList.insertElement(i);
+
       //cout << "The value of i is " << i << endl;
     }
   
