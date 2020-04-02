@@ -11,6 +11,7 @@
 #include <vector>
 #include <array>
 
+#include "CSSLSkipListDictionary.h"
 
 #define MAX_SKIP 2
 // initial size of the highest fast lane with number
@@ -29,6 +30,7 @@ class CSSLSkipList
   int maxLevel;
   int skip;
   uint64_t fastLaneSize;
+  std::unique_ptr<CSSLSkipListDictionary> dict;
   std::vector<uint64_t> skipList;
   std::vector<uint64_t> itemsPerLevel;
   std::vector<uint64_t> startOfFastLane;
