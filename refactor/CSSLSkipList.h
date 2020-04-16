@@ -32,8 +32,6 @@ class CSSLSkipList
   uint64_t fastLaneSize;
   std::unique_ptr<CSSLSkipListDictionary> dict;
   std::vector<uint64_t> skipList;
-  std::vector<uint64_t> itemsPerLevel;
-  std::vector<uint64_t> startOfFastLane;
   std::vector<uint64_t> fastLaneItems;
   std::vector<uint64_t> fastLanePointers;
   std::vector<uint64_t> fastLanes;    
