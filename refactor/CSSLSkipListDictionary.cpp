@@ -1,8 +1,8 @@
-void CSSLSkipListDictionary::calculateFastLaneSize()
-{
-  fastLaneSize = TOP_LANE_BLOCK;
+#include "CSSLSkipListDictionary.h"
 
-  cout << "The value of fastLaneSize is " <<fastLaneSize << endl;
+void CSSLSkipListDictionary::calculateFastLaneSize(int fastLaneSize,int maxLevel,int skip)
+{
+  fastLaneSize = fastLaneSize;
 
   cout <<"The value of maxLevel is" << maxLevel << endl;
   itemsPerLevel.at(maxLevel)=fastLaneSize;
@@ -21,7 +21,5 @@ void CSSLSkipListDictionary::calculateFastLaneSize()
       //startOfFastLane.at(level)=value;
       //fastLaneSize += itemsPerLevel.at(level);
     }
-  exit(0);
-  cout << "The start of fast lane is " <<itemsPerLevel.at(1) << endl;
-  cout << "The start of fastLaneSize is " <<fastLaneSize << endl;
+
 }
