@@ -10,7 +10,7 @@
 #include <iostream>
 #include <stdalign.h>
 #include <stdexcept>
-
+#include <memory>
 #include <functional>
 #include <numeric>
 #include "CSSLSkipList.h"
@@ -23,8 +23,8 @@ void CSSLSkipList::createSkipList(int maxLevel, int skip) {
   this->maxLevel = maxLevel;
   this->skip  = skip;
   this->numberOfElements     = 0;
-  //std::vector<uint64_t> itemsPerLevel(maxLevel);
-  //std::vector<uint64_t> startOfFastLane(maxLevel);
+  std::vector<uint64_t> itemsPerLevel(maxLevel);
+  std::vector<uint64_t> startOfFastLane(maxLevel);
   std::vector<uint64_t> fastLaneItems;
   std::vector<uint64_t> fastLanes;
 
@@ -73,5 +73,5 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
 
 void CSSLSkipList::addElementToSkipList(uint64_t key)
 {
-  skipList.push_back(key);
+  (*skipList).push_back(key);
 }

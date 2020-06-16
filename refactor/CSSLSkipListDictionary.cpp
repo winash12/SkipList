@@ -15,11 +15,11 @@ void CSSLSkipListDictionary::calculateFastLaneSize(int fastLaneSize,int maxLevel
     {
       current *= skip;
       cout << "The value of current is " <<current << endl;
-      //itemsPerLevel.at(level) = current;
-      //value = startOfFastLane.at(level+1) +itemsPerLevel.at(level+1);
-      //cout << "The value of value is " << value << endl;
-      //startOfFastLane.at(level)=value;
-      //fastLaneSize += itemsPerLevel.at(level);
+      itemsPerLevel.at(level) = current;
+      value = startOfFastLane.at(level+1) +itemsPerLevel.at(level+1);
+      cout << "The value of value is " << value << endl;
+      startOfFastLane.at(level)=value;
+      fastLaneSize += itemsPerLevel.at(level);
     }
 
 }

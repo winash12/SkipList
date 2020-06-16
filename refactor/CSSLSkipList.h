@@ -29,9 +29,9 @@ class CSSLSkipList
  private:
   int maxLevel;
   int skip;
-  uint64_t fastLaneSize;
-  std::unique_ptr<CSSLSkipListDictionary> dict;
-  std::vector<uint64_t> skipList;
+  int fastLaneSize;
+  std::shared_ptr<CSSLSkipListDictionary> dict;
+  std::shared_ptr<std::vector<uint64_t>> skipList = std:: make_shared<std::vector<uint64_t>>();
   std::vector<uint64_t> fastLaneItems;
   std::vector<uint64_t> fastLanePointers;
   std::vector<uint64_t> fastLanes;    
