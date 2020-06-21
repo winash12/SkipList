@@ -29,19 +29,19 @@ class CSSLSkipList
  private:
   int maxLevel;
   int skip;
+  int initialFastLaneSize;
   int fastLaneSize;
   std::shared_ptr<std::vector<uint64_t>> skipList = std::make_shared<std::vector<uint64_t>>();
   std::shared_ptr<std::vector<int>> itemsPerLevel = std::make_shared<std::vector<int>>();
   std::shared_ptr<std::vector<int>> startOfFastLane = std::make_shared<std::vector<int>>();
 
-  std::vector<uint64_t> fastLaneItems;
-  std::vector<uint64_t> fastLanePointers;
-  std::vector<uint64_t> fastLanes;    
+  std::shared_ptr<std::vector<int>> fastLaneItems;
+  std::shared_ptr<std::vector<uint64_t>> fastLanes;    
 
   uint8_t numberOfElements;
 
   void      buildFastLanes();
-  void calculateFastLaneSize(int fastLaneSize,int maxLevel,int skip);
+  void calculateFastLaneSize();
   void allocateFastLanes();
 
 
