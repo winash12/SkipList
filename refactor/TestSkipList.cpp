@@ -4,12 +4,14 @@ using namespace std;
 class SkipList;
 int main(void)
 {
-  CSSLSkipList skipList;
-  uint8_t maxLevel;
-  uint8_t skip;
+
+  int maxLevel;
+  int skip;
+  int fastLaneSize;
   maxLevel = 9;
   skip = 2;
-  skipList.createSkipList(maxLevel, skip);
+  fastLaneSize = 8;
+  CSSLSkipList skipList(maxLevel,skip,fastLaneSize);
 
 
   for (uint64_t  i = 0; i < 100000; i += 1000)

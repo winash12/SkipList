@@ -19,7 +19,16 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-void CSSLSkipList::createSkipList(int maxLevel, int skip) {
+
+CSSLSkipList::CSSLSkipList(int maxLevel,int skip,int fastLaneSize)
+{
+   this->maxLevel = maxLevel;
+   this->skip  = skip;
+   this->fastLaneSize = fastLaneSize;
+ 
+}
+
+/*void CSSLSkipList::createSkipList(int maxLevel, int skip) {
 
 
   this->maxLevel = maxLevel;
@@ -28,7 +37,7 @@ void CSSLSkipList::createSkipList(int maxLevel, int skip) {
   //std::vector<uint64_t> fastLaneItems;
   //std::vector<uint64_t> fastLanes;
 
-}
+  }*/
 
 
 void CSSLSkipList::calculateFastLaneSize(int fastLaneSize,int maxLevel,int skip)
@@ -51,7 +60,6 @@ void CSSLSkipList::calculateFastLaneSize(int fastLaneSize,int maxLevel,int skip)
       (*startOfFastLane).at(level)=value;
       fastLaneSize += (*itemsPerLevel).at(level);
     }
-
 }
 
 void CSSLSkipList::insertElement(uint64_t key)

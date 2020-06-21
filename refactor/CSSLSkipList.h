@@ -50,6 +50,9 @@ class CSSLSkipList
   void addElementToSkipList(uint64_t key);
   
  public:
+
+  CSSLSkipList(int maxLevel,int skip,int fastLaneSize);
+  
   void createSkipList(int maxLevel,int skip);
   void insertElement(uint64_t key);
 
