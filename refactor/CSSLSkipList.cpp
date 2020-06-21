@@ -42,7 +42,7 @@ void CSSLSkipList::calculateFastLaneSize()
   (*startOfFastLane).at(maxLevel)=0;
   int current = initialFastLaneSize;
   // calculate level sizes level by level
-  uint64_t value;
+  int value;
   for (int level = this->maxLevel - 2; level >= 0; level--)
     {
       current *= skip;
