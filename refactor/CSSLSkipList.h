@@ -35,8 +35,8 @@ class CSSLSkipList
   std::shared_ptr<std::vector<int>> itemsPerLevel = std::make_shared<std::vector<int>>();
   std::shared_ptr<std::vector<int>> startOfFastLane = std::make_shared<std::vector<int>>();
 
-  std::shared_ptr<std::vector<int>> fastLaneItems;
-  std::shared_ptr<std::vector<uint64_t>> fastLanes;    
+  std::shared_ptr<std::vector<int>> fastLaneItems = std::make_shared<std::vector<int>>();
+  std::shared_ptr<std::vector<uint64_t>> fastLanes = std::make_shared<std::vector<uint64_t>>();    
 
   uint8_t numberOfElements;
 

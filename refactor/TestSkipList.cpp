@@ -11,9 +11,10 @@ int main(void)
   maxLevel = 9;
   skip = 2;
   fastLaneSize = 8;
+
   CSSLSkipList skipList(maxLevel,skip,fastLaneSize);
 
-
+  exit(0);
   for (uint64_t  i = 0; i < 100000; i += 1000)
     {
       skipList.insertElement(i);

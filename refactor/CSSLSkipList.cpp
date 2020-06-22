@@ -22,13 +22,15 @@ using std::endl;
 
 CSSLSkipList::CSSLSkipList(int maxLevel,int skip,int initialFastLaneSize)
 {
-   this->maxLevel = maxLevel;
-   this->skip  = skip;
-   this->initialFastLaneSize = initialFastLaneSize;
-   for (int i = 0; i < maxLevel; ++i )
-     {
-       (*fastLaneItems).push_back(0);
-     }
+
+  this->maxLevel = maxLevel;
+  this->skip  = skip;
+  this->initialFastLaneSize = initialFastLaneSize;
+  for (int i = 0; i < maxLevel; ++i )
+    {
+      (*fastLaneItems).push_back(0);
+    }
+  calculateFastLaneSize();
 }
 
 
@@ -36,7 +38,6 @@ void CSSLSkipList::calculateFastLaneSize()
 
 {
 
-  cout <<"The value of maxLevel is" << maxLevel << endl;
   (*itemsPerLevel).at(maxLevel)=initialFastLaneSize;
   (*itemsPerLevel).push_back(initialFastLaneSize);
   (*startOfFastLane).at(maxLevel)=0;
