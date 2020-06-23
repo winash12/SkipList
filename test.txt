@@ -1,0 +1,4 @@
+List of things to be initially looked at:
+
+Removing "using namespace std" from the face of the earth
+Converting (*<pointer-name>).<whatever> to <pointer-name>-><whatever>
