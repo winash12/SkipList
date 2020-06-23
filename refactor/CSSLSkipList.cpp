@@ -37,23 +37,27 @@ CSSLSkipList::CSSLSkipList(int maxLevel,int skip,int initialFastLaneSize)
 void CSSLSkipList::calculateFastLaneSize()
 
 {
-
-  (*itemsPerLevel).at(maxLevel)=initialFastLaneSize;
   (*itemsPerLevel).push_back(initialFastLaneSize);
-  (*startOfFastLane).at(maxLevel)=0;
-  int current = initialFastLaneSize;
+  (*startOfFastLane).push_back(0);
   // calculate level sizes level by level
   int value;
+  int current;
+
+  auto it = (*itemsPerLevel).begin();
   for (int level = this->maxLevel - 2; level >= 0; level--)
     {
-      current *= skip;
-      cout << "The value of current is " <<current << endl;
-      (*itemsPerLevel).at(level) = current;
-      value = (*startOfFastLane).at(level+1) +(*itemsPerLevel).at(level+1);
-      cout << "The value of value is " << value << endl;
-      (*startOfFastLane).at(level)=value;
-      fastLaneSize += (*itemsPerLevel).at(level);
+      //current = (*itemsPerLevel)[level+1]*skip;
+      auto nx = std::next(it,1);
+      cout << "The value of current is " << *nx << endl;
+      exit(0);
+      (*itemsPerLevel).push_back(current);
+      value = (*startOfFastLane)[level+1] +(*itemsPerLevel)[level+1];
+      //cout << "The value of value is " << value << endl;
+      (*startOfFastLane).push_back(value);
+      fastLaneSize += (*itemsPerLevel)[level];
     }
+  exit(0);
+  cout << "The value of fastLaneSize is " << fastLaneSize << endl;
   for ( int i = 0; i < fastLaneSize; ++i )
     {
       (*fastLanes).push_back(INT_MAX);

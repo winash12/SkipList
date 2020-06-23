@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <math.h>
 #include <memory>
+#include <iterator>
 #include <vector>
 #include <array>
 
@@ -31,12 +32,12 @@ class CSSLSkipList
   int skip;
   int initialFastLaneSize;
   int fastLaneSize;
-  std::shared_ptr<std::vector<uint64_t>> skipList = std::make_shared<std::vector<uint64_t>>();
-  std::shared_ptr<std::vector<int>> itemsPerLevel = std::make_shared<std::vector<int>>();
-  std::shared_ptr<std::vector<int>> startOfFastLane = std::make_shared<std::vector<int>>();
+  std::unique_ptr<std::vector<uint64_t>> skipList = std::make_unique<std::vector<uint64_t>>();
+  std::unique_ptr<std::vector<int>> itemsPerLevel = std::make_unique<std::vector<int>>();
+  std::unique_ptr<std::vector<int>> startOfFastLane = std::make_unique<std::vector<int>>();
 
-  std::shared_ptr<std::vector<int>> fastLaneItems = std::make_shared<std::vector<int>>();
-  std::shared_ptr<std::vector<uint64_t>> fastLanes = std::make_shared<std::vector<uint64_t>>();    
+  std::unique_ptr<std::vector<int>> fastLaneItems = std::make_unique<std::vector<int>>();
+  std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();    
 
   uint8_t numberOfElements;
 
