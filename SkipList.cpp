@@ -144,9 +144,9 @@ uint64_t SkipList::insertItemIntoFastLane(int8_t level,
 					  shared_ptr<_CSSL_DataNode> newNode)
 {
   uint64_t curPos = slist->starts_of_flanes[level] + slist->flane_items[level];
-  //cout << "The value of curPos is " << curPos << endl;
+  cout << "The value of curPos is " << slist->starts_of_flanes[level] << endl;
   uint64_t levelLimit = curPos + slist->items_per_level[level];
-
+  exit(0);
   //cout << "The value of levelLimit is " << levelLimit << endl;
 
   if (curPos > levelLimit)

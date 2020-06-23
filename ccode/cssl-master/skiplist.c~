@@ -1,0 +1,73 @@
+/*
+ * Copyright 2017 Stefan Sprenger <sprengsz@informatik.hu-berlin.de>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+#include "skiplist.h"
+
+// Creates a new skip list
+_CSSL_SkipList* createSkipList(uint8_t maxLevel, uint8_t skip) {
+  _CSSL_SkipList* slist = malloc(sizeof(*slist));
+
+  slist->max_level        = maxLevel;
+  slist->num_elements     = 0;
+  slist->head             = newNode(0);
+  slist->tail             = slist->head;
+  slist->skip             = skip > 1 ? skip : 2;
+  slist->items_per_level  = malloc(sizeof(uint32_t) * maxLevel);
+  slist->starts_of_flanes = malloc(sizeof(uint32_t) * maxLevel);
+  slist->flane_items      = malloc(sizeof(uint32_t) * maxLevel);
+
+  for (uint8_t level = 0; level < maxLevel; level++)
+    slist->flane_items[level] = 0;
+
+  buildFastLanes(slist);
+  srand(0);
+
+  return slist;
+}
+
+// Build fast lanes
+void buildFastLanes(_CSSL_SkipList* slist) {
+  uint32_t flane_size = TOP_LANE_BLOCK;
+
+  slist->items_per_level[slist->max_level - 1]  = flane_size;
+  slist->starts_of_flanes[slist->max_level - 1] = 0;
+
+  // calculate level sizes level by level
+  for (int8_t level = slist->max_level - 2; level >= 0; level--) {
+    slist->items_per_level[level]  = slist->items_per_level[level + 1] *
+                                       slist->skip;
+
+    printf("%i\n",slist->items_per_level[level]);
+
+    slist->starts_of_flanes[level] = slist->starts_of_flanes[level + 1 ] +
+                                       slist->items_per_level[level + 1];
+    //printf("%i\n",slist->starts_of_flanes[level]);
+    flane_size += slist->items_per_level[level];
+    //printf("%i\n",flane_size);
+  }
+
+}
+
+
+
+// Creates a new node
+_CSSL_DataNode* newNode(uint32_t key) {
+  _CSSL_DataNode* node = malloc(sizeof(*node));
+  node->key  = key;
+  node->next = NULL;
+
+  return node;
+}
