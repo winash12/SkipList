@@ -91,8 +91,9 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
   while(key > (*fastLanes).at(curPos) && curPos < levelLimit)
     curPos++;
 
-  (*fastLanes).insert((*fastLanes).begin()+curPos,key);
-
+  if ((*fastLanes)[curPos] == INT_MAX)
+    fastLanes->insert((*fastLanes).begin()+curPos,key);
+  (*fastLaneItems)[level]++;
 }
 
 void CSSLSkipList::addElementToSkipList(uint64_t key)
