@@ -9,7 +9,7 @@ int main(void)
   int skip;
   int fastLaneSize;
   maxLevel = 9;
-  skip = 2;
+  skip = 5;
   fastLaneSize = 8;
 
   CSSLSkipList skipList(maxLevel,skip,fastLaneSize);
