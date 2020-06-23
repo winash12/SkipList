@@ -47,8 +47,8 @@ void CSSLSkipList::calculateFastLaneSize()
   for (int level = this->maxLevel - 2; level >= 0; level--)
     {
       //current = (*itemsPerLevel)[level+1]*skip;
-      auto nx = std::next(it,1);
-      cout << "The value of current is " << *nx << endl;
+      auto nx = *it++;
+      cout << "The value of current is " << nx << endl;
       exit(0);
       (*itemsPerLevel).push_back(current);
       value = (*startOfFastLane)[level+1] +(*itemsPerLevel)[level+1];
