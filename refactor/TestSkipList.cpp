@@ -30,9 +30,8 @@ int main(void) {
 
 	//node = result.start;
 	//cout <<"The value of start is " << result.start->key << endl; {
-      cout <<"The value of key is " << node->key << endl;
-      node = (shared_ptr<_CSSL_DataNode>)node->next;
-     }
-     cout <<"The value of end is " << result.end->key << endl;*/
+	//cout <<"The value of key is " << node->key << endl;
+	//node = (shared_ptr<_CSSL_DataNode>)node->next;
+	//cout <<"The value of end is " << result.end->key << endl;*/
 	return 0;
 }
