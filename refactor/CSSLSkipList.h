@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -12,8 +14,6 @@
 #include <vector>
 #include <array>
 
-
-
 #define MAX_SKIP 2
 // initial size of the highest fast lane with number
 // of keys that fit into one cache line
@@ -24,41 +24,36 @@
 #define SIMD_SEGMENTS 4
 // data list node
 
+class CSSLSkipList {
+private:
+	int maxLevel;
+	int skip;
+	int initialFastLaneSize;
+	int fastLaneSize;
+	std::unique_ptr<std::vector<uint64_t>> skipList = std::make_unique<std::vector<uint64_t>>();
+	std::unique_ptr<std::vector<int>> itemsPerLevel = std::make_unique<std::vector<int>>();
+	std::unique_ptr<std::vector<int>> startOfFastLane = std::make_unique<std::vector<int>>();
 
-class CSSLSkipList
-{
- private:
-  int maxLevel;
-  int skip;
-  int initialFastLaneSize;
-  int fastLaneSize;
-  std::unique_ptr<std::vector<uint64_t>> skipList = std::make_unique<std::vector<uint64_t>>();
-  std::unique_ptr<std::vector<int>> itemsPerLevel = std::make_unique<std::vector<int>>();
-  std::unique_ptr<std::vector<int>> startOfFastLane = std::make_unique<std::vector<int>>();
+	std::unique_ptr<std::vector<int>> fastLaneItems = std::make_unique<std::vector<int>>();
+	std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();
 
-  std::unique_ptr<std::vector<int>> fastLaneItems = std::make_unique<std::vector<int>>();
-  std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();    
+	uint8_t numberOfElements;
 
-  uint8_t numberOfElements;
+	void buildFastLanes();
+	void calculateFastLaneSize();
+	void allocateFastLanes();
 
-  void      buildFastLanes();
-  void calculateFastLaneSize();
-  void allocateFastLanes();
+	void insertItemIntoFastLane(int level,
+															uint64_t key);
+	void addElementToSkipList(uint64_t key);
 
+public:
+	CSSLSkipList(int maxLevel, int skip, int fastLaneSize);
 
-  void   insertItemIntoFastLane(int level,
-				uint64_t key);  
-  void addElementToSkipList(uint64_t key);
-  
- public:
+	void createSkipList(int maxLevel, int skip);
+	void insertElement(uint64_t key);
 
-  CSSLSkipList(int maxLevel,int skip,int fastLaneSize);
-  
-  void createSkipList(int maxLevel,int skip);
-  void insertElement(uint64_t key);
+	uint64_t searchElement(uint64_t key);
 
-  uint64_t searchElement(uint64_t key);
-
-  std::vector<uint64_t> searchRange(uint64_t startKey, uint64_t endKey);
-
+	std::vector<uint64_t> searchRange(uint64_t startKey, uint64_t endKey);
 };

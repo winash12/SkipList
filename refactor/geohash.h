@@ -33,12 +33,10 @@
 #include <stdint.h>
 
 #if defined(__cplusplus)
-extern "C"
-{
+extern "C" {
 #endif
 
-    typedef enum
-    {
+    typedef enum {
         GEOHASH_NORTH = 0,
         GEOHASH_EAST,
         GEOHASH_WEST,
@@ -49,27 +47,23 @@ extern "C"
         GEOHASH_NORT_EAST
     } GeoDirection;
 
-    typedef struct
-    {
+    typedef struct {
             uint64_t bits;
             uint8_t step;
     } GeoHashBits;
 
-    typedef struct
-    {
+    typedef struct {
             double max;
             double min;
     } GeoHashRange;
 
-    typedef struct
-    {
+    typedef struct {
             GeoHashBits hash;
             GeoHashRange latitude;
             GeoHashRange longitude;
     } GeoHashArea;
 
-    typedef struct
-    {
+    typedef struct {
             GeoHashBits north;
             GeoHashBits east;
             GeoHashBits west;

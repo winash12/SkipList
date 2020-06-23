@@ -47,41 +47,33 @@
 
 int geohash_encode(
         GeoHashRange lat_range, GeoHashRange lon_range,
-        double latitude, double longitude, uint8_t step, GeoHashBits* hash)
-{
-    if (NULL == hash || step > 32 || step == 0)
-    {
+        double latitude, double longitude, uint8_t step, GeoHashBits* hash) {
+    if (NULL == hash || step > 32 || step == 0) {
         return -1;
     }
     hash->bits = 0;
     hash->step = step;
     uint8_t i = 0;
     if (latitude < lat_range.min || latitude > lat_range.max
-     || longitude < lon_range.min || longitude > lon_range.max)
-    {
+     || longitude < lon_range.min || longitude > lon_range.max) {
         return -1;
     }
 
-    for (; i < step; i++)
-    {
+    for (; i < step; i++) {
         uint8_t lat_bit, lon_bit;
-        if (lat_range.max - latitude >= latitude - lat_range.min)
-        {
+        if (lat_range.max - latitude >= latitude - lat_range.min) {
             lat_bit = 0;
             lat_range.max = (lat_range.max + lat_range.min) / 2;
         }
-        else
-        {
+        else {
             lat_bit = 1;
             lat_range.min = (lat_range.max + lat_range.min) / 2;
         }
-        if (lon_range.max - longitude >= longitude - lon_range.min)
-        {
+        if (lon_range.max - longitude >= longitude - lon_range.min) {
             lon_bit = 0;
             lon_range.max = (lon_range.max + lon_range.min) / 2;
         }
-        else
-        {
+        else {
             lon_bit = 1;
             lon_range.min = (lon_range.max + lon_range.min) / 2;
         }
@@ -93,16 +85,13 @@ int geohash_encode(
     return 0;
 }
 
-static inline uint8_t get_bit(uint64_t bits, uint8_t pos)
-{
+static inline uint8_t get_bit(uint64_t bits, uint8_t pos) {
     return (bits >> pos) & 0x01;
 }
 
 int geohash_decode(
-        GeoHashRange lat_range, GeoHashRange lon_range, GeoHashBits hash, GeoHashArea* area)
-{
-    if (NULL == area)
-    {
+        GeoHashRange lat_range, GeoHashRange lon_range, GeoHashBits hash, GeoHashArea* area) {
+    if (NULL == area) {
         return -1;
     }
     area->hash = hash;
@@ -111,37 +100,29 @@ int geohash_decode(
     area->latitude.max = lat_range.max;
     area->longitude.min = lon_range.min;
     area->longitude.max = lon_range.max;
-    for (; i < hash.step; i++)
-    {
+    for (; i < hash.step; i++) {
         uint8_t lat_bit, lon_bit;
         lon_bit = get_bit(hash.bits, (hash.step - i) * 2 - 1);
         lat_bit = get_bit(hash.bits, (hash.step - i) * 2 - 2);
-        if (lat_bit == 0)
-        {
+        if (lat_bit == 0) {
             area->latitude.max = (area->latitude.max + area->latitude.min) / 2;
         }
-        else
-        {
+        else {
             area->latitude.min = (area->latitude.max + area->latitude.min) / 2;
         }
-        if (lon_bit == 0)
-        {
+        if (lon_bit == 0) {
             area->longitude.max = (area->longitude.max + area->longitude.min) / 2;
         }
-        else
-        {
+        else {
             area->longitude.min = (area->longitude.max + area->longitude.min) / 2;
         }
     }
     return 0;
 }
 
-static inline uint64_t interleave64(uint32_t xlo, uint32_t ylo)
-{
-    static const uint64_t B[] =
-        { 0x5555555555555555, 0x3333333333333333, 0x0F0F0F0F0F0F0F0F, 0x00FF00FF00FF00FF, 0x0000FFFF0000FFFF };
-    static const unsigned int S[] =
-        { 1, 2, 4, 8, 16 };
+static inline uint64_t interleave64(uint32_t xlo, uint32_t ylo) {
+    static const uint64_t B[] = { 0x5555555555555555, 0x3333333333333333, 0x0F0F0F0F0F0F0F0F, 0x00FF00FF00FF00FF, 0x0000FFFF0000FFFF };
+    static const unsigned int S[] = { 1, 2, 4, 8, 16 };
 
     uint64_t x = xlo; // Interleave lower  bits of x and y, so the bits of x
     uint64_t y = ylo; // are in the even positions and bits from y in the odd; //https://graphics.stanford.edu/~seander/bithacks.html#InterleaveBMN
@@ -166,13 +147,10 @@ static inline uint64_t interleave64(uint32_t xlo, uint32_t ylo)
     return x | (y << 1);
 }
 
-static inline uint64_t deinterleave64(uint64_t interleaved)
-{
-    static const uint64_t B[] =
-        { 0x5555555555555555, 0x3333333333333333, 0x0F0F0F0F0F0F0F0F, 0x00FF00FF00FF00FF, 0x0000FFFF0000FFFF,
+static inline uint64_t deinterleave64(uint64_t interleaved) {
+    static const uint64_t B[] = { 0x5555555555555555, 0x3333333333333333, 0x0F0F0F0F0F0F0F0F, 0x00FF00FF00FF00FF, 0x0000FFFF0000FFFF,
                 0x00000000FFFFFFFF };
-    static const unsigned int S[] =
-        { 0, 1, 2, 4, 8, 16 };
+    static const unsigned int S[] = { 0, 1, 2, 4, 8, 16 };
 
     uint64_t x = interleaved; ///reverse the interleave process (http://stackoverflow.com/questions/4909263/how-to-efficiently-de-interleave-bits-inverse-morton)
     uint64_t y = interleaved >> 1;
@@ -200,17 +178,14 @@ static inline uint64_t deinterleave64(uint64_t interleaved)
 
 int geohash_fast_encode(
         GeoHashRange lat_range, GeoHashRange lon_range, double latitude,
-        double longitude, uint8_t step,  GeoHashBits* hash)
-{
-    if (NULL == hash || step > 32 || step == 0)
-    {
+        double longitude, uint8_t step,  GeoHashBits* hash) {
+    if (NULL == hash || step > 32 || step == 0) {
         return -1;
     }
     hash->bits = 0;
     hash->step = step;
     if   (latitude < lat_range.min || latitude > lat_range.max
-      || longitude < lon_range.min || longitude > lon_range.max)
-    {
+      || longitude < lon_range.min || longitude > lon_range.max) {
         return -1;
     }
 
@@ -233,10 +208,8 @@ int geohash_fast_encode(
     return 0;
 }
 
-int geohash_fast_decode(GeoHashRange lat_range, GeoHashRange lon_range, GeoHashBits hash, GeoHashArea* area)
-{
-    if (NULL == area)
-    {
+int geohash_fast_decode(GeoHashRange lat_range, GeoHashRange lon_range, GeoHashBits hash, GeoHashArea* area) {
+    if (NULL == area) {
         return -1;
     }
     area->hash = hash;
@@ -271,20 +244,17 @@ int geohash_fast_decode(GeoHashRange lat_range, GeoHashRange lon_range, GeoHashB
     return 0;
 }
 
-static int geohash_move_x(GeoHashBits* hash, int8_t d)
-{
+static int geohash_move_x(GeoHashBits* hash, int8_t d) {
     if (d == 0)
         return 0;
     uint64_t x = hash->bits & 0xaaaaaaaaaaaaaaaaLL;
     uint64_t y = hash->bits & 0x5555555555555555LL;
 
     uint64_t zz = 0x5555555555555555LL >> (64 - hash->step * 2);
-    if (d > 0)
-    {
+    if (d > 0) {
         x = x + (zz + 1);
     }
-    else
-    {
+    else {
         x = x | zz;
         x = x - (zz + 1);
     }
@@ -293,20 +263,17 @@ static int geohash_move_x(GeoHashBits* hash, int8_t d)
     return 0;
 }
 
-static int geohash_move_y(GeoHashBits* hash, int8_t d)
-{
+static int geohash_move_y(GeoHashBits* hash, int8_t d) {
     if (d == 0)
         return 0;
     uint64_t x = hash->bits & 0xaaaaaaaaaaaaaaaaLL;
     uint64_t y = hash->bits & 0x5555555555555555LL;
 
     uint64_t zz = 0xaaaaaaaaaaaaaaaaLL >> (64 - hash->step * 2);
-    if (d > 0)
-    {
+    if (d > 0) {
         y = y + (zz + 1);
     }
-    else
-    {
+    else {
         y = y | zz;
         y = y - (zz + 1);
     }
@@ -315,8 +282,7 @@ static int geohash_move_y(GeoHashBits* hash, int8_t d)
     return 0;
 }
 
-int geohash_get_neighbors(GeoHashBits hash, GeoHashNeighbors* neighbors)
-{
+int geohash_get_neighbors(GeoHashBits hash, GeoHashNeighbors* neighbors) {
     geohash_get_neighbor(hash, GEOHASH_NORTH, &neighbors->north);
     geohash_get_neighbor(hash, GEOHASH_EAST, &neighbors->east);
     geohash_get_neighbor(hash, GEOHASH_WEST, &neighbors->west);
@@ -328,88 +294,73 @@ int geohash_get_neighbors(GeoHashBits hash, GeoHashNeighbors* neighbors)
     return 0;
 }
 
-int geohash_get_neighbor(GeoHashBits hash, GeoDirection direction, GeoHashBits* neighbor)
-{
-    if (NULL == neighbor)
-    {
+int geohash_get_neighbor(GeoHashBits hash, GeoDirection direction, GeoHashBits* neighbor) {
+    if (NULL == neighbor) {
         return -1;
     }
     *neighbor = hash;
-    switch (direction)
-    {
-        case GEOHASH_NORTH:
-        {
+    switch (direction) {
+        case GEOHASH_NORTH: {
             geohash_move_x(neighbor, 0);
             geohash_move_y(neighbor, 1);
             break;
         }
-        case GEOHASH_SOUTH:
-        {
+        case GEOHASH_SOUTH: {
             geohash_move_x(neighbor, 0);
             geohash_move_y(neighbor, -1);
             break;
         }
-        case GEOHASH_EAST:
-        {
+        case GEOHASH_EAST: {
             geohash_move_x(neighbor, 1);
             geohash_move_y(neighbor, 0);
             break;
         }
-        case GEOHASH_WEST:
-        {
+        case GEOHASH_WEST: {
             geohash_move_x(neighbor, -1);
             geohash_move_y(neighbor, 0);
             break;
         }
-        case GEOHASH_SOUTH_WEST:
-        {
+        case GEOHASH_SOUTH_WEST: {
             geohash_move_x(neighbor, -1);
             geohash_move_y(neighbor, -1);
             break;
         }
-        case GEOHASH_SOUTH_EAST:
-        {
+        case GEOHASH_SOUTH_EAST: {
             geohash_move_x(neighbor, 1);
             geohash_move_y(neighbor, -1);
             break;
         }
-        case GEOHASH_NORT_WEST:
-        {
+        case GEOHASH_NORT_WEST: {
             geohash_move_x(neighbor, -1);
             geohash_move_y(neighbor, 1);
             break;
         }
-        case GEOHASH_NORT_EAST:
-        {
+        case GEOHASH_NORT_EAST: {
             geohash_move_x(neighbor, 1);
             geohash_move_y(neighbor, 1);
             break;
         }
-        default:
-        {
+        default: {
             return -1;
         }
     }
     return 0;
 }
 
-GeoHashBits geohash_next_leftbottom(GeoHashBits bits)
-{
+GeoHashBits geohash_next_leftbottom(GeoHashBits bits) {
     GeoHashBits newbits = bits;
     newbits.step++;
     newbits.bits <<= 2;
     return newbits;
 }
-GeoHashBits geohash_next_rightbottom(GeoHashBits bits)
-{
+GeoHashBits geohash_next_rightbottom(GeoHashBits bits) {
     GeoHashBits newbits = bits;
     newbits.step++;
     newbits.bits <<= 2;
     newbits.bits += 2;
     return newbits;
 }
-GeoHashBits geohash_next_lefttop(GeoHashBits bits)
-{
+GeoHashBits geohash_next_lefttop(GeoHashBits bits) {
     GeoHashBits newbits = bits;
     newbits.step++;
     newbits.bits <<= 2;
@@ -417,8 +368,7 @@ GeoHashBits geohash_next_lefttop(GeoHashBits bits)
     return newbits;
 }
 
-GeoHashBits geohash_next_righttop(GeoHashBits bits)
-{
+GeoHashBits geohash_next_righttop(GeoHashBits bits) {
     GeoHashBits newbits = bits;
     newbits.step++;
     newbits.bits <<= 2;

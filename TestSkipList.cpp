@@ -1,9 +1,10 @@
 #include <iostream>
 #include "SkipList.h"
-using namespace std;
-class SkipList;
-int main(void)
-{
+
+//class SkipList;
+
+int main(void) {
+	using namespace std;
 	SkipList skipList;
 	uint8_t maxLevel;
 	uint8_t skip;
@@ -12,8 +13,7 @@ int main(void)
 	skipList.createSkipList(maxLevel, skip);
 	shared_ptr<_CSSL_DataNode> node;
 
-	for (uint64_t i = 0; i < 100000; i += 1000)
-	{
+	for (uint64_t i = 0; i < 100000; i += 1000) {
 		skipList.insertElement(i);
 		//cout << "The value of i is " << i << endl;
 	}
@@ -28,8 +28,7 @@ int main(void)
 
 	node = result.start;
 	cout << "The value of start is " << result.start->key << endl;
-	while (node != result.end)
-	{
+	while (node != result.end) {
 		cout << "The value of key is " << node->key << endl;
 		node = (shared_ptr<_CSSL_DataNode>)node->next;
 	}
