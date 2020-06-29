@@ -35,7 +35,7 @@ private:
 	std::unique_ptr<std::deque<int>> itemsPerLevel = std::make_unique<std::deque<int>>();
 	std::unique_ptr<std::deque<int>> startOfFastLane = std::make_unique<std::deque<int>>();
 
-	std::unique_ptr<std::vector<int>> fastLaneItems = std::make_unique<std::vector<int>>();
+	std::unique_ptr<std::deque<int>> fastLaneItems = std::make_unique<std::deque<int>>();
 	std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();
 
 	uint8_t numberOfElements;

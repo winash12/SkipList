@@ -27,7 +27,7 @@ CSSLSkipList::CSSLSkipList(int maxLevel,int skip,int initialFastLaneSize)
   this->initialFastLaneSize = initialFastLaneSize;
   for (int i = 0; i < maxLevel; ++i )
     {
-      fastLaneItems->push_back(0);
+      fastLaneItems->push_front(0);
     }
   calculateFastLaneSize();
 }
@@ -102,7 +102,7 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
   if (curPos > levelLimit)
     curPos = levelLimit;
 
-  while(key > (*fastLanes).at(curPos) && curPos < levelLimit)
+  while(key > fastLanes->at(curPos) && curPos < levelLimit)
     curPos++;
 
   if ((*fastLanes)[curPos] == INT_MAX)
@@ -112,5 +112,5 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
 
 void CSSLSkipList::addElementToSkipList(uint64_t key)
 {
-  (*skipList).push_back(key);
+  skipList->push_back(key);
 }
