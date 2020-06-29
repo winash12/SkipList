@@ -84,29 +84,27 @@ void CSSLSkipList::insertElement(uint64_t key)
 
 void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
 {
-  cout << "The value of level is " <<level << endl;
   int index1 = startOfFastLane->at(level);
   cout << "The value of index1 is " <<index1 << endl;
   int index2 = fastLaneItems->at(level);
   cout << "The value of index2 is " <<index2 << endl;
-
   int curPos = index1 + index2;
-  int index3 = (*itemsPerLevel).at(level);
-
-
+  int index3 = itemsPerLevel->at(level);
+ 
   cout << "The value of curPos is " <<curPos << endl;
 
   int levelLimit = curPos + index3;
   cout << "The value of levelLimit is " << levelLimit << endl;
-  exit(0);
+
   if (curPos > levelLimit)
     curPos = levelLimit;
 
-  while(key > fastLanes->at(curPos) && curPos < levelLimit)
+  while(key > (*fastLanes)[curPos] && curPos < levelLimit)
     curPos++;
 
-  if ((*fastLanes)[curPos] == INT_MAX)
-    fastLanes->insert((*fastLanes).begin()+curPos,key);
+
+  fastLanes->insert(fastLanes->begin()+curPos,key);
+
   fastLaneItems->at(level)++;
 }
 

@@ -18,7 +18,7 @@ int main(void) {
 	  skipList.insertElement(i);
 
 	}
-
+	exit(0);
 	//skipList.printFastLanes();
 	//exit(0);
 
