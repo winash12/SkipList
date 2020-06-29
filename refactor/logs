@@ -1,7 +1,0 @@
-The value of i is 0
-The value of index1 is 781248
-The value of index2 is 0
-The value of curPos is 781248
-The value of levelLimit is 3906248
-terminate called after throwing an instance of 'std::out_of_range'
-  what():  vector::_M_range_check: __n (which is 781248) >= this->size() (which is 0)
