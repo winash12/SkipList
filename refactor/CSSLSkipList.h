@@ -12,6 +12,7 @@
 #include <memory>
 #include <iterator>
 #include <vector>
+#include <deque>
 #include <array>
 
 #define MAX_SKIP 2
@@ -31,8 +32,8 @@ private:
 	int initialFastLaneSize;
 	int fastLaneSize;
 	std::unique_ptr<std::vector<uint64_t>> skipList = std::make_unique<std::vector<uint64_t>>();
-	std::unique_ptr<std::vector<int>> itemsPerLevel = std::make_unique<std::vector<int>>();
-	std::unique_ptr<std::vector<int>> startOfFastLane = std::make_unique<std::vector<int>>();
+	std::unique_ptr<std::deque<int>> itemsPerLevel = std::make_unique<std::deque<int>>();
+	std::unique_ptr<std::deque<int>> startOfFastLane = std::make_unique<std::deque<int>>();
 
 	std::unique_ptr<std::vector<int>> fastLaneItems = std::make_unique<std::vector<int>>();
 	std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();
