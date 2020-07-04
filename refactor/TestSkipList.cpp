@@ -14,7 +14,7 @@ int main(void) {
 	CSSLSkipList skipList(maxLevel, skip, fastLaneSize);
 	
 	for (uint64_t i = 0; i < 100000; i += 1000) {
-	  cout << "The value of i is " << i << endl;
+	  //cout << "The value of i is " << i << endl;
 	  skipList.insertElement(i);
 
 	}

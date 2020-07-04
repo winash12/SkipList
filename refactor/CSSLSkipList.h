@@ -38,7 +38,7 @@ private:
 	std::unique_ptr<std::deque<int>> fastLaneItems = std::make_unique<std::deque<int>>();
 	std::unique_ptr<std::vector<uint64_t>> fastLanes = std::make_unique<std::vector<uint64_t>>();
 
-	uint8_t numberOfElements;
+	uint32_t numberOfElements = 0;
 
 	void buildFastLanes();
 	void calculateFastLaneSize();
@@ -54,6 +54,8 @@ public:
 	void createSkipList(int maxLevel, int skip);
 	void insertElement(uint64_t key);
 
+	void insertItemsIntoFastLanes();
+	
 	uint64_t searchElement(uint64_t key);
 
 	std::vector<uint64_t> searchRange(uint64_t startKey, uint64_t endKey);
