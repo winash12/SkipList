@@ -80,11 +80,12 @@ void CSSLSkipList::insertElement(uint64_t key)
 
 void CSSLSkipList::insertItemsIntoFastLanes()
 {
+
   for (int level = 0;level < maxLevel;level++)
     {
-      for (int i = 0;skipList->size();i +=skip);
+      for (int i = 0;skipList->size();i +=skip)
       {
-	
+	insertItemIntoFastLane(level,skipList->at(i));
       }
     }
 }
