@@ -69,23 +69,20 @@ void CSSLSkipList::calculateFastLaneSize()
 
   
   fastLanes->resize(fastLaneSize,INT_MAX);
-  skipList->resize(fastLaneSize);
+
 }
 
-void CSSLSkipList::insertElement(uint64_t key)
-{
-  addElementToSkipList(key);
-  
-}
 
-void CSSLSkipList::insertItemsIntoFastLanes()
+void CSSLSkipList::insertItemsIntoFastLanes(vector<uint64_t> inputData)
 {
 
-  for (int level = 0,p=skip;level < maxLevel;p *=skip,level++)
+  skipList.reset(new std::vector<uint64_t>(std::move(inputData)));
+  for (int level = 0,p=5;level < maxLevel;p *=5,level++)
     {
-      for (int i = 0;skipList->size();i +=p)
+      for (int i = 0;inputData.size();i +=p)
       {
-	insertItemIntoFastLane(level,skipList->at(i));
+	cout << "The value of i is " << inputData.at(i) << endl;
+	//insertItemIntoFastLane(level,skipList->at(i));
       }
     }
 }
@@ -114,10 +111,5 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
   fastLanes->insert(fastLanes->begin()+curPos,key);
 
   fastLaneItems->at(level)++;
-  numberOfElements++;
 }
 
-void CSSLSkipList::addElementToSkipList(uint64_t key)
-{
-  skipList->push_back(key);
-}

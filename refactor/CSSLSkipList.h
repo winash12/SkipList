@@ -25,6 +25,8 @@
 #define SIMD_SEGMENTS 4
 // data list node
 
+using std::vector;
+
 class CSSLSkipList {
 private:
 	int maxLevel;
@@ -52,9 +54,8 @@ public:
 	CSSLSkipList(int maxLevel, int skip, int fastLaneSize);
 
 	void createSkipList(int maxLevel, int skip);
-	void insertElement(uint64_t key);
 
-	void insertItemsIntoFastLanes();
+	void insertItemsIntoFastLanes(vector<uint64_t> inputData);
 	
 	uint64_t searchElement(uint64_t key);
 

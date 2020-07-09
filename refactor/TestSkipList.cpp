@@ -12,12 +12,12 @@ int main(void) {
 	fastLaneSize = 8;
 
 	CSSLSkipList skipList(maxLevel, skip, fastLaneSize);
-	
+	vector<uint64_t> inputData;
 	for (uint64_t i = 0; i < 100000; i += 1000) {
 	  //cout << "The value of i is " << i << endl;
-	  skipList.insertElement(i);
-
+	  inputData.push_back(i);
 	}
+	skipList.insertItemsIntoFastLanes(inputData);
 	exit(0);
 	//skipList.printFastLanes();class test
 
