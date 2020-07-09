@@ -68,7 +68,7 @@ void CSSLSkipList::calculateFastLaneSize()
       }*/
 
   
-  fastLanes->resize(fastLaneSize);
+  fastLanes->resize(fastLaneSize,INT_MAX);
   skipList->resize(fastLaneSize);
 }
 
@@ -81,9 +81,9 @@ void CSSLSkipList::insertElement(uint64_t key)
 void CSSLSkipList::insertItemsIntoFastLanes()
 {
 
-  for (int level = 0;level < maxLevel;level++)
+  for (int level = 0,p=skip;level < maxLevel;p *=skip,level++)
     {
-      for (int i = 0;skipList->size();i +=skip)
+      for (int i = 0;skipList->size();i +=p)
       {
 	insertItemIntoFastLane(level,skipList->at(i));
       }

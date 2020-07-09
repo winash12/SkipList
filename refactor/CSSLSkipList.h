@@ -13,7 +13,7 @@
 #include <iterator>
 #include <vector>
 #include <deque>
-#include <array>
+
 
 #define MAX_SKIP 2
 // initial size of the highest fast lane with number

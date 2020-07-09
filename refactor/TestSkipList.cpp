@@ -19,7 +19,8 @@ int main(void) {
 
 	}
 	exit(0);
-	//skipList.printFastLanes();
+	//skipList.printFastLanes();class test
+
 	//exit(0);
 
 	//uint64_t key = 500;
