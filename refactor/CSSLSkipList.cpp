@@ -67,30 +67,35 @@ void CSSLSkipList::calculateFastLaneSize()
       
       }*/
 
-  
   fastLanes->resize(fastLaneSize,INT_MAX);
-
 }
 
+void CSSLSkipList::printFastLanes()
+{
+  for (auto it = fastLanes->begin(); it != fastLanes->end(); ++it)
+    {
+      if (*it != INT_MAX)
+	cout << *it << endl;
+    }
+}
 
-void CSSLSkipList::insertItemsIntoFastLanes(vector<uint64_t> inputData)
+void CSSLSkipList::insertItemsIntoFastLanes(std::vector<uint64_t> inputData)
 {
 
-  skipList.reset(new std::vector<uint64_t>(std::move(inputData)));
   for (int level = 0,p=5;level < maxLevel;p *=5,level++)
     {
-      for (int i = 0;inputData.size();i +=p)
+      for (int i = 0;i < inputData.size();i +=p)
       {
-	cout << "The value of i is " << inputData.at(i) << endl;
-	//insertItemIntoFastLane(level,skipList->at(i));
+	insertItemIntoFastLane(level,inputData.at(i));
       }
     }
+  skipList.reset(new std::vector<uint64_t>(std::move(inputData)));
 }
 
 void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
 {
   int index1 = startOfFastLane->at(level);
-  cout << "The value of index1 is " <<index1 << endl;
+  //cout << "The value of index1 is " <<index1 << endl;
   int index2 = fastLaneItems->at(level);
   //cout << "The value of index2 is " <<index2 << endl;
   int curPos = index1 + index2;
@@ -102,9 +107,10 @@ void CSSLSkipList::insertItemIntoFastLane(int level,uint64_t key)
   //cout << "The value of levelLimit is " << levelLimit << endl;
 
   if (curPos > levelLimit)
-    curPos = levelLimit;
+  curPos = levelLimit;
 
-  while(key > fastLanes->at(curPos) && curPos < levelLimit)
+
+  while( (key > fastLanes->at(curPos)) && (curPos < levelLimit))
     curPos++;
 
 

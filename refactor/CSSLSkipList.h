@@ -55,6 +55,8 @@ public:
 
 	void createSkipList(int maxLevel, int skip);
 
+	void printFastLanes();
+	
 	void insertItemsIntoFastLanes(vector<uint64_t> inputData);
 	
 	uint64_t searchElement(uint64_t key);

@@ -18,6 +18,7 @@ int main(void) {
 	  inputData.push_back(i);
 	}
 	skipList.insertItemsIntoFastLanes(inputData);
+	//skipList.printFastLanes();
 	exit(0);
 	//skipList.printFastLanes();class test
 
